@@ -48,9 +48,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun apiResponse() {
+
         viewModel._pagingDataFlow?.observe(viewLifecycleOwner) { chatList ->
             lifecycleScope.launch { stockAdapter.submitData(chatList) }
         }
+
         viewModel.stockData.observe(viewLifecycleOwner) { data ->
             when (data) {
                 is NetworkResult.Error -> {
