@@ -1,9 +1,5 @@
 package com.pritom.dutta.movie.data.helper
 
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import com.pritom.dutta.movie.domain.models.Movie
-import com.pritom.dutta.movie.domain.models.TmdbWrapperModel
 import java.io.InputStreamReader
 
 /**
@@ -20,16 +16,16 @@ object Helper {
         return stringBuilder.toString()
     }
 
-    fun getTestData(fileName: String): TmdbWrapperModel<Movie> {
-        val gson = Gson()
-        val jsonString = readFileResource( "/$fileName")
-        val typeToken = object : TypeToken<TmdbWrapperModel<Movie>>() {}.type
-        return gson.fromJson(jsonString, typeToken)
-
-//        val moshi = Moshi.Builder().build()
-//        val typeToken = object : TypeToken<TmdbWrapperModel<Movie>>() {}.type
-//        val jsonAdapter= moshi.adapter(typeToken)
+//    fun getTestData(fileName: String): TmdbWrapperModel<Movie> {
+//        val gson = Gson()
 //        val jsonString = readFileResource( "/$fileName")
-//        return jsonAdapter.fromJson(jsonString)!!
-    }
+//        val typeToken = object : TypeToken<TmdbWrapperModel<Movie>>() {}.type
+//        return gson.fromJson(jsonString, typeToken)
+//
+////        val moshi = Moshi.Builder().build()
+////        val typeToken = object : TypeToken<TmdbWrapperModel<Movie>>() {}.type
+////        val jsonAdapter= moshi.adapter(typeToken)
+////        val jsonString = readFileResource( "/$fileName")
+////        return jsonAdapter.fromJson(jsonString)!!
+//    }
 }

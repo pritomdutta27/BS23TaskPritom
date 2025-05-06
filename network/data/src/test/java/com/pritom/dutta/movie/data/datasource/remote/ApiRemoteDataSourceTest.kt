@@ -42,7 +42,7 @@ class ApiRemoteDataSourceTest{
 
         val response = sutApiRemoteDataSource.invoke().test {
             val result = awaitItem()
-            assertEquals(true, result.items.isEmpty())
+            assertEquals(true, result.products.isEmpty())
             awaitComplete()
         }
     }
@@ -58,8 +58,8 @@ class ApiRemoteDataSourceTest{
 //        mockWebServer.takeRequest()
         val response = sutApiRemoteDataSource.invoke().test {
             val result = awaitItem()
-            assertEquals(false, result.items.isEmpty())
-            assertEquals(4, result.items.size)
+            assertEquals(false, result.products.isEmpty())
+            assertEquals(4, result.products.size)
             awaitComplete()
         }
         mockWebServer.takeRequest()

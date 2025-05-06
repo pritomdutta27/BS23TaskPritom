@@ -37,9 +37,9 @@ class MovieApiTest {
         mockResponse.setBody("{\"results\": []}")
         mockWebServer.enqueue(mockResponse)
 
-        val response = apiService.fetchTopRatedMovie(1)
+        val response = apiService.fetchStockData(skip = 1, limit = 10, sortBy = "price%2Ctitle", order = "asc")
         mockWebServer.takeRequest()
-        Assert.assertEquals(true, response.body()?.items?.isEmpty())
+        Assert.assertEquals(true, response.body()?.products?.isEmpty())
     }
 
 
@@ -51,12 +51,12 @@ class MovieApiTest {
         mockResponse.setBody(content)
         mockWebServer.enqueue(mockResponse)
 
-        val response = apiService.fetchTopRatedMovie(1)
+        val response = apiService.fetchStockData(skip = 1, limit = 10, sortBy = "price%2Ctitle", order = "asc")
         mockWebServer.takeRequest()
-        Assert.assertEquals(false, response.body()?.items?.isEmpty())
+        Assert.assertEquals(false, response.body()?.products?.isEmpty())
         Assert.assertEquals(true, response.isSuccessful)
         Assert.assertEquals(200, response.code())
-        Assert.assertEquals(4, response.body()?.items?.size)
+        Assert.assertEquals(4, response.body()?.products?.size)
     }
 
     @Test
@@ -66,7 +66,7 @@ class MovieApiTest {
         mockResponse.setBody("Something went wrong")
         mockWebServer.enqueue(mockResponse)
 
-        val response = apiService.fetchTopRatedMovie(1)
+        val response = apiService.fetchStockData(skip = 1, limit = 10, sortBy = "price%2Ctitle", order = "asc")
         mockWebServer.takeRequest()
         Assert.assertEquals(false, response.isSuccessful)
         Assert.assertEquals(404, response.code())
