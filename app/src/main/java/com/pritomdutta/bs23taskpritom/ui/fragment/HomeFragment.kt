@@ -51,20 +51,26 @@ class HomeFragment : Fragment() {
         viewModel._pagingDataFlow?.observe(viewLifecycleOwner) { chatList ->
             lifecycleScope.launch { stockAdapter.submitData(chatList) }
         }
-//        viewModel.stockData.observe(viewLifecycleOwner) { data ->
-//            when (data) {
-//                is NetworkResult.Error -> {
-//
-//                }
-//                is NetworkResult.Loading-> {
-//
-//                }
-//                is NetworkResult.Success->{
-//                    stockAdapter.submitList(data.data?.listData)
-//
-//                }
-//            }
-//        }
+        viewModel.stockData.observe(viewLifecycleOwner) { data ->
+            when (data) {
+                is NetworkResult.Error -> {
+                    lifecycleScope.launch(Dispatchers.Main) {
+                        Toast.makeText(context, data.message, Toast.LENGTH_SHORT).show()
+                        binding?.progressCircular?.isVisible = false
+                    }
+                }
+                is NetworkResult.Loading-> {
+                    lifecycleScope.launch(Dispatchers.Main) {
+                        binding?.progressCircular?.isVisible = true
+                    }
+                }
+                is NetworkResult.Success->{
+                    lifecycleScope.launch(Dispatchers.Main) {
+                        binding?.progressCircular?.isVisible = false
+                    }
+                }
+            }
+        }
     }
 
 }

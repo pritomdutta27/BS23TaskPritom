@@ -8,7 +8,8 @@ import com.pritom.dutta.movie.domain.repository.StockRepository
 import com.pritom.dutta.movie.domain.utils.NetworkResult
 
 class StockPagingSource(
-    private val repository: StockRepository
+    private val repository: StockRepository,
+    private val onErrorAndLoad:(message: String, isLoad: Boolean)->Unit
 ): PagingSource<Int, ShowDisplayStockData>() {
 
     override fun getRefreshKey(state: PagingState<Int, ShowDisplayStockData>): Int? {
@@ -27,12 +28,13 @@ class StockPagingSource(
            remoteResponse.collect {  data->
                when(data){
                    is NetworkResult.Error-> {
-
+                       onErrorAndLoad(data.message ?: "", false)
                    }
-                   is NetworkResult.Loading<*> -> {
-
+                   is NetworkResult.Loading -> {
+                       onErrorAndLoad("", true)
                    }
-                   is NetworkResult.Success<*> -> {
+                   is NetworkResult.Success -> {
+                       onErrorAndLoad("", false)
                        dataRes = data.data
                    }
                }
