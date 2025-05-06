@@ -1,0 +1,11 @@
+<com.google.android.material.chip.Chip xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.MaterialComponents.Chip.Action"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/_35sdp"
+    android:backgroundTint="#DBE3FF"
+    android:fontFamily="sans-serif"
+    tools:text="beauty"
+    android:textColor="#88A4E8"
+    android:textSize="@dimen/_9ssp" />

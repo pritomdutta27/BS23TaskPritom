@@ -21,8 +21,8 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
+            android:layout_marginTop="@dimen/_12sdp"
             app:layout_constraintBaseline_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="H,1:1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -78,9 +78,9 @@
             android:layout_height="18dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="@+id/tv_discount_price"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tv_price"
-            app:layout_constraintTop_toBottomOf="@+id/tv_discount_price">
+            app:layout_constraintTop_toBottomOf="@+id/tv_price">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/is_premium"
@@ -122,13 +122,15 @@
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chip_category"
             style="@style/Widget.MaterialComponents.Chip.Action"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:chipSpacingHorizontal="@dimen/_4sdp"
             app:chipSpacingVertical="-10dp"
+            app:singleSelection="false"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tv_stock_left"
             app:layout_constraintStart_toStartOf="@+id/img_thumbnail"
-            app:layout_constraintTop_toBottomOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_stock_left" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

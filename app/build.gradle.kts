@@ -57,6 +57,7 @@ dependencies {
     implementation (libs.navigation.ui.ktx)
     implementation(libs.lifecycle.livedataKtx)
     implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.paging)
 
     // Hilt
     implementation(libs.hilt.android)

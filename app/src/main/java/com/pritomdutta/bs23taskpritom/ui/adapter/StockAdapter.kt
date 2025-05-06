@@ -4,10 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.pritom.dutta.movie.domain.models.ShowDisplayStockData
-import com.pritomdutta.bs23taskpritom.base_adapter.BaseListAdapter
+import com.pritomdutta.bs23taskpritom.base_adapter.BasePageAdapter
 
 class StockAdapter() :
-    BaseListAdapter<ShowDisplayStockData>(
+    BasePageAdapter<ShowDisplayStockData>(
         itemsSame = { old, new -> old == new },
         contentsSame = { old, new -> old == new }) {
     override fun onCreateViewHolder(
@@ -19,7 +19,9 @@ class StockAdapter() :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder){
             is StockViewHolder->{
-                holder.bind(getItem(position))
+                getItem(position)?.let {
+                    holder.bind(it)
+                }
             }
         }
     }

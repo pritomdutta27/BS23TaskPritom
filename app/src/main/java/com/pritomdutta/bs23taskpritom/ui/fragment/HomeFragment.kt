@@ -48,19 +48,23 @@ class HomeFragment : Fragment() {
     }
 
     private fun apiResponse() {
-        viewModel.stockData.observe(viewLifecycleOwner) { data ->
-            when (data) {
-                is NetworkResult.Error -> {
-
-                }
-                is NetworkResult.Loading-> {
-
-                }
-                is NetworkResult.Success->{
-                    stockAdapter.submitList(data.data)
-                }
-            }
+        viewModel._pagingDataFlow?.observe(viewLifecycleOwner) { chatList ->
+            lifecycleScope.launch { stockAdapter.submitData(chatList) }
         }
+//        viewModel.stockData.observe(viewLifecycleOwner) { data ->
+//            when (data) {
+//                is NetworkResult.Error -> {
+//
+//                }
+//                is NetworkResult.Loading-> {
+//
+//                }
+//                is NetworkResult.Success->{
+//                    stockAdapter.submitList(data.data?.listData)
+//
+//                }
+//            }
+//        }
     }
 
 }
