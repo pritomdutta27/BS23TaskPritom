@@ -6,4 +6,10 @@
     </style>
 
     <style name="Theme.BS23TaskPritom" parent="Base.Theme.BS23TaskPritom" />
+
+    <style name="roundedImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/_4sdp</item>
+    </style>
+
 </resources>

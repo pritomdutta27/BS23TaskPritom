@@ -2,4 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="color_title">#212534</color>
+    <color name="color_description">#737C9C</color>
+    <color name="color_discount">#E91E63</color>
+    <color name="color_stock_left">#009688</color>
+
 </resources>

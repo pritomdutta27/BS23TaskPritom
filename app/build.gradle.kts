@@ -67,6 +67,9 @@ dependencies {
     implementation(libs.glide)
     ksp(libs.glide.ksp)
 
+    //Own Module
+    implementation(project(":network:data"))
+    implementation(project(":network:domain"))
 
     //Testing Library
     testImplementation(libs.junit)
