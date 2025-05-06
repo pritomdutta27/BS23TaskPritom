@@ -23,5 +23,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "BS23TaskPritom"
 include(":app")
-//include(":network:data")
-//include(":network:domain")
+include(":network:data")
+include(":network:domain")

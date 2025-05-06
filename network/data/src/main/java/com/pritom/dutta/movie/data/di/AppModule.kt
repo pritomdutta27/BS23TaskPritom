@@ -23,5 +23,5 @@ object AppModule {
 
     @Provides
     @AppBaseUrl
-    fun provideBaseUrl(): String = "https://api.themoviedb.org/3/"
+    fun provideBaseUrl(): String = "https://dummyjson.com"
 }

@@ -3,8 +3,6 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
       <module name="BS23TaskPritom.domain" target="21" />
-      <module name="BS23TaskPritom.network.data" target="21" />
-      <module name="BS23TaskPritom.network.domain" target="21" />
     </bytecodeTargetLevel>
   </component>
 </project>

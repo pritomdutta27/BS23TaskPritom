@@ -1,4 +1,4 @@
-package com.pritomdutta.bs23taskpritom
+package com.pritomdutta.bs23taskpritom.ui.activity
 
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
@@ -11,6 +11,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import com.google.android.material.snackbar.Snackbar
+import com.pritomdutta.bs23taskpritom.R
 import com.pritomdutta.bs23taskpritom.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 

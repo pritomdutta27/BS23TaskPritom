@@ -19,15 +19,15 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MovieApiTest {
 
     private lateinit var mockWebServer: MockWebServer
-    private lateinit var movieApiService: MovieApiService
+    private lateinit var apiService: ApiService
 
     @Before
     fun setup() {
         mockWebServer = MockWebServer()
-        movieApiService = Retrofit.Builder()
+        apiService = Retrofit.Builder()
             .baseUrl(mockWebServer.url("/"))
             .addConverterFactory(GsonConverterFactory.create())
-            .build().create(MovieApiService::class.java)
+            .build().create(ApiService::class.java)
 
     }
 
@@ -37,7 +37,7 @@ class MovieApiTest {
         mockResponse.setBody("{\"results\": []}")
         mockWebServer.enqueue(mockResponse)
 
-        val response = movieApiService.fetchTopRatedMovie(1)
+        val response = apiService.fetchTopRatedMovie(1)
         mockWebServer.takeRequest()
         Assert.assertEquals(true, response.body()?.items?.isEmpty())
     }
@@ -51,7 +51,7 @@ class MovieApiTest {
         mockResponse.setBody(content)
         mockWebServer.enqueue(mockResponse)
 
-        val response = movieApiService.fetchTopRatedMovie(1)
+        val response = apiService.fetchTopRatedMovie(1)
         mockWebServer.takeRequest()
         Assert.assertEquals(false, response.body()?.items?.isEmpty())
         Assert.assertEquals(true, response.isSuccessful)
@@ -66,7 +66,7 @@ class MovieApiTest {
         mockResponse.setBody("Something went wrong")
         mockWebServer.enqueue(mockResponse)
 
-        val response = movieApiService.fetchTopRatedMovie(1)
+        val response = apiService.fetchTopRatedMovie(1)
         mockWebServer.takeRequest()
         Assert.assertEquals(false, response.isSuccessful)
         Assert.assertEquals(404, response.code())

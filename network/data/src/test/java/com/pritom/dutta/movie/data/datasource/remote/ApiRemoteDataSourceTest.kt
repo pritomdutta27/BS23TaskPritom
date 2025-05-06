@@ -21,17 +21,17 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ApiRemoteDataSourceTest{
 
     private lateinit var mockWebServer: MockWebServer
-    private lateinit var movieApiService: MovieApiService
+    private lateinit var apiService: ApiService
     private lateinit var sutApiRemoteDataSource: ApiRemoteDataSource
 
     @Before
     fun setup() {
         mockWebServer = MockWebServer()
-        movieApiService = Retrofit.Builder()
+        apiService = Retrofit.Builder()
             .baseUrl(mockWebServer.url("/"))
             .addConverterFactory(GsonConverterFactory.create())
-            .build().create(MovieApiService::class.java)
-        sutApiRemoteDataSource = ApiRemoteDataSource(movieApiService)
+            .build().create(ApiService::class.java)
+        sutApiRemoteDataSource = ApiRemoteDataSource(apiService)
     }
 
     @Test

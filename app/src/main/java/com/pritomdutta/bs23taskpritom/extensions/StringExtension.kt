@@ -1,4 +1,4 @@
-package com.pritomdutta.bs23androidtask.extensions
+package com.pritomdutta.bs23taskpritom.extensions
 
 import java.text.ParseException
 import java.text.SimpleDateFormat

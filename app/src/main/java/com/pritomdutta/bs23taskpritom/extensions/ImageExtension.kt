@@ -1,8 +1,7 @@
-package com.pritomdutta.bs23androidtask.extensions
+package com.pritomdutta.bs23taskpritom.extensions
 
 import android.widget.ImageView
 import com.bumptech.glide.Glide
-import com.pritomdutta.bs23androidtask.R
 import com.pritomdutta.bs23taskpritom.R
 
 

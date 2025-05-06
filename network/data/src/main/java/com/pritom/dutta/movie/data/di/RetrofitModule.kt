@@ -2,7 +2,7 @@ package com.pritom.dutta.movie.data.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.pritom.dutta.movie.data.datasource.remote.MovieApiService
+import com.pritom.dutta.movie.data.datasource.remote.ApiService
 import com.pritom.dutta.movie.data.di.annotations.AppBaseUrl
 import dagger.Module
 import dagger.Provides
@@ -44,8 +44,8 @@ object RetrofitModule {
 
     @Provides
     @Singleton
-    fun provideApiService(@AppBaseUrl retrofit: Retrofit): MovieApiService {
-        return retrofit.create(MovieApiService::class.java)
+    fun provideApiService(@AppBaseUrl retrofit: Retrofit): ApiService {
+        return retrofit.create(ApiService::class.java)
     }
 
 }

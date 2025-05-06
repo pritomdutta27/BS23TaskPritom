@@ -59,7 +59,7 @@ dependencies {
     ksp(libs.hilt.android.compiler)
 
     //Own Module Import
-//    implementation(project(":network:domain"))
+    implementation(project(":network:domain"))
 
     //Testing Library
     testImplementation(libs.junit)

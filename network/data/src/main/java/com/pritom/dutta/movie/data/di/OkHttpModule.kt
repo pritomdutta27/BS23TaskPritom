@@ -2,7 +2,6 @@ package com.pritom.dutta.movie.data.di
 
 import com.ihsanbal.logging.Level
 import com.ihsanbal.logging.LoggingInterceptor
-import com.pritom.dutta.movie.domain.utils.DataSourceConstants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,10 +21,10 @@ object OkHttpModule {
 
     private fun getLogInterceptors(isDebug: Boolean = false): Interceptor {
         val builder = LoggingInterceptor.Builder()
-            .addHeader("Authorization", "Bearer ${DataSourceConstants.API_KEY}")
+//            .addHeader("Authorization", "Bearer ${API_KEY}")
             .setLevel(if (isDebug) Level.BASIC else Level.NONE)
             .log(Platform.INFO)
-            .tag("Movie App")
+            .tag("BS23 App")
             .request("Request")
             .response("Response")
         builder.isDebugAble = isDebug
