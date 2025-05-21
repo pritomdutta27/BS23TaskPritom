@@ -8,6 +8,7 @@ data class ShowDisplayStockData(
     val rating: String,
     val category: List<String>,
     val stockStatus: String,
+    val isDiscountAvailable: Boolean,
 )
 
 data class ShowDisplayStockResponse(

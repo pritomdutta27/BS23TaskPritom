@@ -6,6 +6,10 @@ import com.pritom.dutta.movie.domain.models.ShowDisplayStockData
 import com.pritom.dutta.movie.domain.models.ShowDisplayStockResponse
 import com.pritom.dutta.movie.domain.repository.StockRepository
 import com.pritom.dutta.movie.domain.utils.NetworkResult
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.onStart
 
 class StockPagingSource(
     private val repository: StockRepository,
@@ -20,35 +24,41 @@ class StockPagingSource(
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ShowDisplayStockData> {
-       return try {
-           val position = params.key ?: 0
-           var dataRes:ShowDisplayStockResponse? = null
+        val page = params.key ?: 0
 
-           val remoteResponse = repository.fetchStockData(position)
-           remoteResponse.collect {  data->
-               when(data){
-                   is NetworkResult.Error-> {
-                       onErrorAndLoad(data.message ?: "", false)
-                   }
-                   is NetworkResult.Loading -> {
-                       onErrorAndLoad("", true)
-                   }
-                   is NetworkResult.Success -> {
-                       onErrorAndLoad("", false)
-                       dataRes = data.data
-                   }
-               }
+        return try {
+            val result = fetchStockDataOnce(page)
 
-           }
-           LoadResult.Page(
-               data = dataRes?.listData ?: emptyList(),
-               prevKey = if (position == 1 || position == 0) null else position - 1,
-               nextKey = if (dataRes?.total == position || dataRes?.total == 0) null else position + 1
-           )
+            when (result) {
+                is NetworkResult.Success -> {
+                    val data = result.data
+                    onErrorAndLoad("", false)
+                    LoadResult.Page(
+                        data = data?.listData ?: emptyList(),
+                        prevKey = if (page == 0) null else page - 1,
+                        nextKey = if (data?.listData.isNullOrEmpty()) null else page + 1
+                    )
+                }
+                is NetworkResult.Error -> {
+                    onErrorAndLoad(result.message ?: "Unknown error", false)
+                    LoadResult.Error(Exception(result.message))
+                }
+                else -> {
+                    // Shouldn't happen because we filtered Loading, but just in case
+                    LoadResult.Error(Exception("Unexpected result"))
+                }
+            }
 
-       }catch (e: Exception) {
-           LoadResult.Error(e)
-       }
+        } catch (e: Exception) {
+//            onErrorAndLoad(e.message ?: "Unknown error", false)
+            LoadResult.Error(e)
+        }
+    }
 
+    suspend fun fetchStockDataOnce(page: Int): NetworkResult<ShowDisplayStockResponse> {
+        return repository.fetchStockData(page)
+            .onStart { delay(200) }
+            .filter { it !is NetworkResult.Loading } // Skip loading
+            .first() // Take first Success or Error
     }
 }

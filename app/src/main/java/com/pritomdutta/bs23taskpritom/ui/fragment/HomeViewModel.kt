@@ -23,11 +23,11 @@ class HomeViewModel @Inject constructor(private val repository: StockRepository)
     val stockData: LiveData<NetworkResult<Boolean>>
         get() = _stockData
 
-    var _pagingDataFlow: LiveData<PagingData<ShowDisplayStockData>>? = null
+    var pagingDataFlow: LiveData<PagingData<ShowDisplayStockData>>? = null
 
     fun fetchStockData() {
-        _pagingDataFlow = Pager(
-            config = PagingConfig(pageSize = 10, maxSize = 200),
+        pagingDataFlow = Pager(
+            config = PagingConfig(pageSize = 10),
             pagingSourceFactory = {
                 StockPagingSource(repository) { mez, isLoad ->
                     if (isLoad && mez.isEmpty()) {
